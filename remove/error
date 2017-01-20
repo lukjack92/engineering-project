@@ -1,0 +1,57 @@
+  page error 404
+https://themeforest.net/item/chemico-responsive-animated-404-error-template/6962436?ref=freshdesignweb
+zdjecie error http://cipesa.org/wp-content/uploads/2016/02/custom-404-error-page-for-blogger2.jpg
+
+http://wallpaperswide.com/light_background-wallpapers.html
+
+
+file 000-default.conf
+add
+
+sudo nano /etc/apache2/apache2.conf <-
+<Directory /var/www/html/Bootstrap/>
+  AllowOverride All <-
+</Directory>
+
+and create file .htacces in directory Bootstrap
+
+
+ssmtp
+sudo apt-get install ssmtp
+configuration file /etc/ssmtp/ssmtp.conf
+
+/etc/ssmtp/ssmtp.conf
+
+# The user that gets all the mails (UID < 1000, usually the admin)
+root=username@gmail.com
+
+# The mail server (where the mail is sent to), both port 465 or 587 should be acceptable
+# See also https://support.google.com/mail/answer/78799
+mailhub=smtp.gmail.com:587
+
+# The address where the mail appears to come from for user authentication.
+rewriteDomain=gmail.com
+
+# The full hostname
+hostname=localhost
+
+# Use SSL/TLS before starting negotiation
+UseTLS=Yes
+UseSTARTTLS=Yes
+
+# Username/Password
+AuthUser=username
+AuthPass=password
+AuthMethod=LOGIN
+
+# Email 'From header's can override the default domain?
+FromLineOverride=yes
+
+
+#DirectoryIndex index.html 404.html
+ErrorDocument 404 /Bootstrap/404.html
+AuthName "Restricted Area"
+AuthType Basic
+AuthUserFile /Bootstrap/.htpasswd
+AuthGroupFile /dev/null
+require valid-user

@@ -1,0 +1,259 @@
+body {
+  padding-bottom: 50px;
+  background-image: url("../image/tlo.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+form {
+  text-align: center;
+  margin-top: 20px;
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+h1{
+    font-family: Courier;
+    text-shadow: 4px 8px 12px black;
+}
+
+h2{
+    font-family: Courier;
+    text-shadow: 4px 8px 12px black;
+}
+
+legend{
+
+    text-shadow: 1px 1px 1px black;
+}
+
+h1.font {
+  font-family: 'Merriweather', serif;
+  text-shadow: 10px 10px 5px #000000;
+}
+
+h2.login {
+  text-align: center;
+}
+
+h3.database {
+    font-weight: bold;
+}
+
+tr.color {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.video{
+  margin-bottom: 15px;
+}
+
+.btnn{
+  margin-top: 10px;
+}
+
+#delete{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.zom
+{
+    animation:anime11 3s linear infinite;
+    -webkit-animation:anime11 3s linear infinite;
+}
+
+@keyframes anime1
+{
+  0% {transform:scale(1.00);}
+  25% {transform:scale(1.015);}
+  50% {transform:scale(1.035);}
+  75% {transform:scale(1.060);}
+  100% {transform:scale(1.075);}
+}
+
+@-webkit-keyframes anime1
+{
+  0% {transform:scale(1.00);}
+  25% {transform:scale(1.015);}
+  50% {transform:scale(1.035);}
+  75% {transform:scale(1.060);}
+  100% {transform:scale(1.075);}
+}
+
+@keyframes anime11
+{
+  0% {transform:scale(1.075);}
+  12,5% {transform:scale(1.060);}
+  37,5% {transform:scale(1.035);}
+  50% {transform:scale(1.015);}
+  62,5% {transform:scale(1.00);}
+  75% {transform:scale(1.035);}
+  87,5% {transform:scale(1.060);}
+  100% {transform:scale(1.075);}
+}
+
+@-webkit-keyframes anime11
+{
+  0% {transform:scale(1.075);}
+  12,5% {transform:scale(1.060);}
+  37,5% {transform:scale(1.035);}
+  50% {transform:scale(1.015);}
+  62,5% {transform:scale(1.00);}
+  75% {transform:scale(1.035);}
+  87,5% {transform:scale(1.060);}
+  100% {transform:scale(1.075);}
+}
+
+
+.zoom{
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1);
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);
+}
+.zoom:hover
+{
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1.3);
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1.3);
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1.3);
+    transition: all 200ms ease-in;
+    transform: scale(1.3);
+}
+
+.imag
+{
+  width: 198px;
+  height: 198px;
+  margin-top: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  border: 6px solid #B0E0E6;
+}
+
+li > a {
+  -webkit-transition: all 300ms ease-in;
+  -webkit-transform: scale(1);
+  -ms-transition: all 300ms ease-in;
+  -ms-transform: scale(1);
+  -moz-transition: all 300ms ease-in;
+  -moz-transform: scale(1);
+  transition: all 300ms ease-in;
+  transform: scale(1);
+}
+
+li > a:hover {
+  -webkit-transition: all 300ms ease-in;
+  -webkit-transform: scale(1.2);
+  -ms-transition: all 300ms ease-in;
+  -ms-transform: scale(1.2);
+  -moz-transition: all 300ms ease-in;
+  -moz-transform: scale(1.2);
+  transition: all 300ms ease-in;
+  transform: scale(1.2) rotate(5deg);
+  text-shadow: 10px 10px 10px black;
+}
+
+.zoom_gal
+{
+  -webkit-transition: all 200ms ease-in;
+  -webkit-transform: scale(1);
+  -ms-transition: all 200ms ease-in;
+  -ms-transform: scale(1);
+  -moz-transition: all 200ms ease-in;
+  -moz-transform: scale(1);
+  transition: all 200ms ease-in;
+  transform: scale(1);
+}
+
+.zoom_gal:hover
+{
+  -webkit-transition: all 200ms ease-in;
+  -webkit-transform: scale(1.2);
+  -ms-transition: all 200ms ease-in;
+  -ms-transform: scale(1.2);
+  -moz-transition: all 200ms ease-in;
+  -moz-transform: scale(1.2);
+  transition: all 200ms ease-in;
+  transform: scale(1.2) rotate(6deg);
+  box-shadow: 15px 15px 30px #182019;
+}
+
+#rodzic {
+    margin: 40px;
+    border: 2px solid #B0E0E6;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 40px;
+    box-shadow: 25px 25px 25px #888;
+  }
+
+
+.img {
+color: red;
+border-radius: 8px;
+}
+
+.color {
+
+    font-weight: bold;
+}
+
+p{
+    font-size: 16px;
+}
+
+.top {
+    height:100%;
+    width: 100%;
+}
+.noborder{
+  border: none;
+}
+
+.span{
+    -moz-box-shadow: 0 0 2px black;
+    -webkit-box-shadow: 0 0 2px black;
+    box-shadow: 0px 0px 2px black;
+}
+
+.image {
+  background-image: url("../image/tlo1.jpg");
+	background-size: 100% 100%;
+  color: white;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.margines {
+  margin-top: 15px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: 2px solid #B0E0E6;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+}
+
+.nav a{
+  font-size: 20px;
+}
+
+.ok1 {
+  background-color: red;
+}

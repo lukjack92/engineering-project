@@ -49,67 +49,122 @@
       </div>
     </nav>
     <div class="container">
-
     <?php
+
+      require_once ("connect.php");
+
       if(isset($_SESSION["online"]) && $_SESSION["online"] == true)
       {
         echo "<center><h2>Witaj ".$_SESSION['login']."!";
         echo '<div><span class="glyphicon glyphicon-picture"></span> Panel Galerii</div></h2></center>';
-
-        require_once ("connect.php");
-
       }else {
         echo '<center><h2><span class="glyphicon glyphicon-picture"></span> Galeria</h2></center>';
       }
 
-    if(isset($_SESSION['error']))
-    {
-        echo $_SESSION['error'];
-        unset($_SESSION['error']);
-    }
-
-    if(isset($_SESSION['error0']))
-    {
-        echo $_SESSION['error0'];
-        unset($_SESSION['error0']);
-    }
-    if(isset($_SESSION['error1']))
-    {
-        echo $_SESSION['error1'];
-        unset($_SESSION['error1']);
-    }
-//echo `whoami`;
-
-        $dir = "/var/www/html/praca/video";
-        if(file_exists($dir))
-        {
-          //echo ISTNIEJE_TAK." ";
-
-          if (glob($dir . "/*"))
-          {
-            //echo "Pliki sa w folderze";
-
-          } else {
-            echo '<div class="alert alert-danger well"><center><strong>Danger!</strong> Nie ma plików z galeri!!!</center></div>';
-            //header('Location: gallery.php');
-          }
-        }else {
-          //echo NIE_ISTNIEJE_ALE_STWORZONY." ";
-
-          mkdir("/var/www/html/praca/video/",0777);
+      if(isset($_SESSION['error']))
+      {
+          echo $_SESSION['error'];
+          unset($_SESSION['error']);
         }
 
-	$files = scandir('video');
-	$wynik = count($files);
+        if(isset($_SESSION['error0']))
+        {
+          echo $_SESSION['error0'];
+          unset($_SESSION['error0']);
+        }
+        if(isset($_SESSION['error1']))
+        {
+          echo $_SESSION['error1'];
+          unset($_SESSION['error1']);
+        }
+//echo `whoami`;
 
+          $dir = "/var/www/html/praca/video";
+          if(file_exists($dir))
+          {
+              //echo ISTNIEJE_TAK." ";
+              if (glob($dir . "/*"))
+              {
+                //echo "Pliki sa w folderze";
+              }else
+              {
+                  echo '<div class="alert alert-danger well"><center><strong>Danger!</strong> Nie ma plików z galeri!!!</center></div>';
+                  //header('Location: gallery.php');
+              }
+            }else
+            {
+                //echo NIE_ISTNIEJE_ALE_STWORZONY." ";
+                mkdir("/var/www/html/praca/video/",0777);
+              }
+              
 /*wyswietlanie calej galeri; baza danych polaczenie i zdjecia + kat (tabela kategori i zdjec)*/
+if ($connect->connect_error)
+{
+  ?> <div class="alert alert-danger" role="alert"><?php echo "Brak bazy danych. Błąd: ".$connect->connect_errno;?></div> <?php
+}
+else
+{
 
 
+    $tab_1_cat = array();
+    $tab_1_desc = array();
+    $tab_2_cat = array();
+    $tab_2_pic = array();
 
+    if($result = @$connect->query("SELECT * FROM	$db_cat"))
+    {
+      $how = $result->num_rows;
 
+      $result_pic = @$connect->query("SELECT * FROM	$db_pic");
+      $how_pic = $result_pic->num_rows;
 
+      if($how == 0)
+      {
+          echo '<div class="alert alert-danger"><center><strong>Baza danych jest pusta!!!</strong></center></div>';
+      }
+      if($how > 0)
+      {
+        for($q = 1; $q <= $how; $q++)
+        {
+          $row = $result->fetch_assoc();
+          array_push($tab_1_cat,$row['category']);
+          array_push($tab_1_desc,$row['description']);
+        }
+
+        for($qq = 1; $qq <= $how_pic; $qq++)
+        {
+          $row_pic = $result_pic->fetch_assoc();
+          array_push($tab_2_cat,$row_pic['category']);
+          array_push($tab_2_pic,$row_pic['picture']);
+        }
+
+        for($l = 0; $l < $how; $l++)
+        {
+          $cat = 0;
+          for($ii = 0; $ii < $how_pic; $ii++)
+          {
+            if($tab_1_cat[$l] == $tab_2_cat[$ii])
+            {
+              $cat++;
+              if($cat == 1)
+              {
+                ?><div class="alert alert-info text-align:left"><strong><h3><?php echo $tab_1_desc[$l] ?><h3></strong></div> <?php
+              }
+              echo $tab_1_cat[$l]." == ".$tab_2_cat[$ii]."<br>";
+            }
+          }
+        }
+      }
+    }else
+    {
+      echo '<div class="alert alert-danger"><center><strong>Nie ma odpowiedniej tabeli dla bazy</strong></center></div>';
+    }
+}
 
 /*dodawanie kategori zdjec usuwanie*/
+$files = scandir('video');
+$wynik = count($files);
+
 echo '<div class="row">';
 	for($i = 2; $i < $wynik ; $i++)
 	{
@@ -129,7 +184,8 @@ echo '<div class="row">';
           echo '</center></div>';
     }
     echo '</div>';
-        if(isset($_SESSION['online']) && $_SESSION['online'] == true)
+
+    if(isset($_SESSION['online']) && $_SESSION['online'] == true)
         {
     ?>
 
@@ -168,7 +224,7 @@ else
       $how = $result->num_rows;
     }else
     {
-      echo '<div class="alert alert-danger"><center><strong>Brak tabeli questions</strong></center></div>';
+      echo '<div class="alert alert-danger"><center><strong>Brak tabeli category</strong></center></div>';
     }
 }
   if($how == 0)
@@ -231,8 +287,7 @@ else
 ?>
     </div>
       <?php
-      $connect->close();
-          }
+  }
         ?>
 </div>
     <nav class="navbar navbar-default navbar-fixed-bottom">

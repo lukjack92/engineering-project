@@ -38,7 +38,7 @@
         <li><a href="quiz.php"><span class="glyphicon glyphicon-education"></span> Quiz</a></li>
         <li><a href="video.php"><span class="glyphicon glyphicon-facetime-video"></span> Video</a></li>
         <li><a href="gallery.php"><span class="glyphicon glyphicon-picture"></span> Galeria</a>
-        <li><a href="about.html"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
+        <li><a href="about.php"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
         <li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span> Kontakt</a></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
@@ -64,27 +64,19 @@
            <?php
              require_once ("connect.php");
 
-             $connect = @new mysqli($host,$db_user,$db_password,$db_name);
-
-            mysqli_query($connect, "SET CHARSET utf8");
-       			mysqli_query($connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
-
              if ($connect->connect_error)
            	{
            		echo "Connect Error: ".$connect->connect_errno;
            	}
            	else
              {
-
                  if($result = @$connect->query("SELECT * FROM $db_admin"))
                  {
-
                    $how = $result->num_rows;
 
                    for ($i = 1; $i <= $how; $i++)
                    {
                      $row = $result->fetch_assoc();
-
  ?>
  </thead>
  <tbody>
@@ -127,7 +119,7 @@ if($how == 1)
                 </div>
 
                 <div class="form-group">
-                  <input type="text" placeholder="Password" name="password" class="form-control">
+                  <input type="password" placeholder="Password" name="password" class="form-control">
                 </div>
 
                 <button type="submit" class="btn btn-primary pull-c">Dodaj</button>
@@ -140,7 +132,6 @@ if($how == 1)
                         }
                   ?>
           </div>
-
   </div>
 </div>
   <nav class="navbar navbar-default navbar-fixed-bottom">

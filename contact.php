@@ -1,5 +1,7 @@
 <?php
   session_start();
+
+  $id = $_GET['id'];
 ?>
 <!DOCTYPE>
 <html lang="pl">
@@ -30,8 +32,18 @@
       <li><a href="quiz.php"><span class="glyphicon glyphicon-education"></span> Quiz</a></li>
       <li><a href="video.php"><span class="glyphicon glyphicon-facetime-video"></span> Video</a></li>
       <li><a href="gallery.php"><span class="glyphicon glyphicon-picture"></span> Galeria</a>
-      <li><a href="about.html"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
+      <li><a href="about.php"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
       <li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span> Kontakt</a></li>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+      <?php
+        if(isset($_SESSION['online']) && $_SESSION['online'] == true)
+        {
+          echo '<li><a href="logout.php?id=3"><span class="glyphicon glyphicon-log-out"></span> Wyloguj</a></li>';
+        }else{
+          echo '<li><a href="admin.php?id=3"><span class="glyphicon glyphicon-edit"></span> Zaloguj</a></li>';
+        }
+      ?>
     </ul>
   <div>
 </nav>
@@ -70,7 +82,7 @@
               ?>
             </div>
             <div class="form-group">
-              <textarea rows="10" class="form-control" placeholder="Message" id="message" name="message"></textarea>
+              <textarea rows="10" class="form-control" placeholder="Message" id="message" name="message" style="resize: vertical"></textarea>
               <?php
                 if(isset($_SESSION['errMessage']))
                 {

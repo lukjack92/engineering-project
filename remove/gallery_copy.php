@@ -17,21 +17,7 @@
   <link href="css/mystyle.css" rel="stylesheet">
   <script src="js/window.js"></script>
 
-
-  <!-- Add jQuery library -->
-	<script type="text/javascript" src="fancyapps/lib/jquery-1.10.2.min.js"></script>
-
-	<!-- Add fancyBox main JS and CSS files -->
-	<script type="text/javascript" src="fancyapps/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-	<link rel="stylesheet" type="text/css" href="fancyapps/source/jquery.fancybox.css?v=2.1.5" media="screen" />
-
-<script type="text/javascript">
-$(document).ready(function() {
-  $('.fancybox').fancybox();
-});
-</script>
-
-</head>
+  </head>
   <body>
     <nav class="navbar navbar-default" role="navigation">
       <div class="navbar-header">
@@ -47,7 +33,7 @@ $(document).ready(function() {
           <li><a href="quiz.php"><span class="glyphicon glyphicon-education"></span> Quiz</a></li>
           <li><a href="video.php"><span class="glyphicon glyphicon-facetime-video"></span> Video</a></li>
           <li><a href="gallery.php"><span class="glyphicon glyphicon-picture"></span> Galeria</a></li>
-          <li><a href="about.php"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
+          <li><a href="about.html"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
           <li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span> Kontakt</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
@@ -63,150 +49,90 @@ $(document).ready(function() {
       </div>
     </nav>
     <div class="container">
+
     <?php
-
-      require_once ("connect.php");
-
       if(isset($_SESSION["online"]) && $_SESSION["online"] == true)
       {
         echo "<center><h2>Witaj ".$_SESSION['login']."!";
         echo '<div><span class="glyphicon glyphicon-picture"></span> Panel Galerii</div></h2></center>';
+
+        require_once ("connect.php");
+
       }else {
         echo '<center><h2><span class="glyphicon glyphicon-picture"></span> Galeria</h2></center>';
       }
 
-      if(isset($_SESSION['error']))
-      {
-          echo $_SESSION['error'];
-          unset($_SESSION['error']);
-        }
+    if(isset($_SESSION['error']))
+    {
+        echo $_SESSION['error'];
+        unset($_SESSION['error']);
+    }
 
-        if(isset($_SESSION['error0']))
-        {
-          echo $_SESSION['error0'];
-          unset($_SESSION['error0']);
-        }
-        if(isset($_SESSION['error1']))
-        {
-          echo $_SESSION['error1'];
-          unset($_SESSION['error1']);
-        }
+    if(isset($_SESSION['error0']))
+    {
+        echo $_SESSION['error0'];
+        unset($_SESSION['error0']);
+    }
+    if(isset($_SESSION['error1']))
+    {
+        echo $_SESSION['error1'];
+        unset($_SESSION['error1']);
+    }
 //echo `whoami`;
 
-          $dir = "/var/www/html/praca/gallery";
-          if(file_exists($dir))
+        $dir = "/var/www/html/praca/video";
+        if(file_exists($dir))
+        {
+          //echo ISTNIEJE_TAK." ";
+
+          if (glob($dir . "/*"))
           {
-              //echo ISTNIEJE_TAK." ";
-              if (glob($dir . "/*"))
-              {
-                //echo "Pliki sa w folderze";
-              }else
-              {
-                  echo '<div class="alert alert-danger well"><center><strong>Danger!</strong> Nie ma plików z galeri!!!</center></div>';
-                  //header('Location: gallery.php');
-              }
-            }else
-            {
-                //echo NIE_ISTNIEJE_ALE_STWORZONY." ";
-                mkdir("/var/www/html/praca/gallery/",0777);
-              }
+            //echo "Pliki sa w folderze";
+
+          } else {
+            echo '<div class="alert alert-danger well"><center><strong>Danger!</strong> Nie ma plików z galeri!!!</center></div>';
+            //header('Location: gallery.php');
+          }
+        }else {
+          //echo NIE_ISTNIEJE_ALE_STWORZONY." ";
+
+          mkdir("/var/www/html/praca/video/",0777);
+        }
+
+	$files = scandir('video');
+	$wynik = count($files);
 
 /*wyswietlanie calej galeri; baza danych polaczenie i zdjecia + kat (tabela kategori i zdjec)*/
-if ($connect->connect_error)
-{
-  ?> <div class="alert alert-danger" role="alert"><?php echo "Brak bazy danych. Błąd: ".$connect->connect_errno;?></div> <?php
-}
-else
-{
-    $tab_1_cat = array();
-    $tab_1_desc = array();
-    $tab_2_cat = array();
-    $tab_2_pic = array();
 
-    if($result = @$connect->query("SELECT * FROM	$db_cat"))
-    {
-      $how = $result->num_rows;
 
-      $result_pic = @$connect->query("SELECT * FROM	$db_pic");
-      $how_pic = $result_pic->num_rows;
 
-      if($how == 0)
-      {
-          echo '<div class="alert alert-danger"><center><strong>Baza danych jest pusta!!!</strong></center></div>';
-      }
-      if($how > 0)
-      {
-        for($q = 1; $q <= $how; $q++)
-        {
-          $row = $result->fetch_assoc();
-          array_push($tab_1_cat,$row['category']);
-          array_push($tab_1_desc,$row['description']);
-        }
 
-        for($qq = 1; $qq <= $how_pic; $qq++)
-        {
-          $row_pic = $result_pic->fetch_assoc();
-          array_push($tab_2_cat,$row_pic['category']);
-          array_push($tab_2_pic,$row_pic['picture']);
-        }
 
-        for($l = 0; $l < $how; $l++)
-        {
-          $cat = 0;
-
-          ?>
-            <div class="row" style="padding: 8px; margin-top: 8px; margin-bottom: 8px; border-radius: 8px; background-color: #f8f8f8 ">
-          <?php
-
-          for($ii = 0; $ii < $how_pic; $ii++)
-          {
-            if($tab_1_cat[$l] == $tab_2_cat[$ii])
-            {
-              $cat++;
-              if($cat == 1)
-              {
-                ?><h3><?php echo $tab_1_desc[$l]; ?><h3><hr> <?php
-              }
-              //$tab_1_cat[$l]." == ".$tab_2_cat[$ii]."<br>";
-              //$tab_2_pic[$ii];
-
-              $pic = "gallery/"."$tab_2_pic[$ii]";
-              $ext = pathinfo($pic, PATHINFO_EXTENSION);
-
-              ?>
-                  <center><div class="col-sm-3">
-                    <a class="fancybox" data-fancybox-group="<?php echo $tab_1_cat[$l]; ?>" href="<?php echo $pic ?>"><img class="imag zoom_gal" src="<?php echo $pic ?>"></a>
-              <?php
-                      if(isset($_SESSION['online']) && $_SESSION['online'] == true)
-                      {
-              ?>
-                          <a href="delimag.php?imag=<?php echo '/var/www/html/praca/'.$pic ?>"><button style="margin-bottom: 10px" class="btn btn-primary">Usuń</button></a>
-              <?php
-                      }
-              ?>
-                  </div></center>
-
-            <?php
-            }
-          }
-          echo '</div>';
-        }
-      }
-    }else
-    {
-      echo '<div class="alert alert-danger"><center><strong>Brak tabeli category!!!</strong></center></div>';
-    }
-}
 
 /*dodawanie kategori zdjec usuwanie*/
+echo '<div class="row">';
+	for($i = 2; $i < $wynik ; $i++)
+	{
+    $pic = "video/"."$files[$i]";
+    $ext = pathinfo($pic, PATHINFO_EXTENSION);
+    ?>
+      <div class="col-sm-3">
+        <center><a href="<?php echo $pic ?>" ><img class="imag zoom_gal" src="<?php echo $pic ?>"></a>
+    <?php
+          if(isset($_SESSION['online']) && $_SESSION['online'] == true)
+          {
+    ?>
+          <a href="delimag.php?imag=<?php echo '/var/www/html/praca/'.$pic ?>"><button style="margin-bottom: 10px" class="btn btn-primary">Usuń</button></a>
 
-//$files = scandir('video');
-//$wynik = count($files);
+    <?php
+          }
+          echo '</center></div>';
+    }
+    echo '</div>';
+        if(isset($_SESSION['online']) && $_SESSION['online'] == true)
+        {
+    ?>
 
-
-if(isset($_SESSION['online']) && $_SESSION['online'] == true)
-{
-?>
 <div class="well">
 <h2 style="font-size: 45px">Galeria<span class="glyphicon glyphicon-hand-down"></span></h2>
 <hr>
@@ -220,7 +146,7 @@ if(isset($_SESSION['online']) && $_SESSION['online'] == true)
     <div class="row">
       <div class="col-sm-12 form-group">
             <label>2. Opis kategorii:</label>
-            <textarea class="form-control" rows="3" name="description" style="resize: vertical"></textarea>
+            <textarea class="form-control" rows="2" name="description"></textarea>
       </div>
     </div>
     <div class="row">
@@ -242,7 +168,7 @@ else
       $how = $result->num_rows;
     }else
     {
-      echo '<div class="alert alert-danger"><center><strong>Brak tabeli category</strong></center></div>';
+      echo '<div class="alert alert-danger"><center><strong>Brak tabeli questions</strong></center></div>';
     }
 }
   if($how == 0)
@@ -305,7 +231,8 @@ else
 ?>
     </div>
       <?php
-  }
+      $connect->close();
+          }
         ?>
 </div>
     <nav class="navbar navbar-default navbar-fixed-bottom">

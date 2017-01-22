@@ -51,7 +51,7 @@
         <li><a href="quiz.php"><span class="glyphicon glyphicon-education"></span> Quiz</a></li>
         <li><a href="video.php"><span class="glyphicon glyphicon-facetime-video"></span> Video</a></li>
         <li><a href="gallery.php"><span class="glyphicon glyphicon-picture"></span> Galeria</a></li>
-        <li><a href="about.html"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
+        <li><a href="about.php"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
         <li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span> Kontakt</a></li>
       </ul>
       <ul class="nav navbar-nav pull-right">
@@ -138,7 +138,7 @@
         <form action="add.php" method="POST" class="well">
           <h2 style="font-size: 45px">Dodaj pytanie do Quiz<span class="glyphicon glyphicon-hand-down"></span></h2><hr>
           <div class="form-group">
-            <textarea class="form-control" rows="2" name="tresc" placeholder="Treść pytania"></textarea>
+            <textarea class="form-control" rows="3" name="tresc" placeholder="Treść pytania" style="resize: vertical"></textarea>
             <?php
               if(isset($_SESSION['tresc']))
               {

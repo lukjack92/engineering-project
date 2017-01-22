@@ -1,3 +1,8 @@
+<?php
+  session_start();
+
+  $id = $_GET['id'];
+?>
 <!DOCTYPE>
 <html lang="pl">
 <head>
@@ -41,7 +46,6 @@
           }
         ?>
       </ul>
-    <div>
   </nav>
   <div class="container">
     <h2>Kilka słów o mnie i o pracy dyplomowej... <span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span></h2>

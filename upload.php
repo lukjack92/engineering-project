@@ -7,12 +7,11 @@ if((isset($_SESSION['online']) && $_SESSION['online'] == true))
   $file = $_FILES["fileToUpload"]["name"];
   $cat = $_POST['sel'];
 
-  $target_dir = "/var/www/html/praca/video/";
+  $target_dir = "/var/www/html/praca/gallery/";
   echo $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 
   if($_FILES["fileToUpload"]["name"])
   {
-
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
     // Check if file already exists
@@ -24,7 +23,7 @@ if((isset($_SESSION['online']) && $_SESSION['online'] == true))
     }
 
     // Check file size
-    if ($_FILES["fileToUpload"]["size"] > 9000000000)
+    if ($_FILES["fileToUpload"]["size"] > 9000000000000000)
     {
       $_SESSION['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> Zdjęcie jest za duże!!!</div>';
       header('Location: gallery.php');
@@ -32,19 +31,15 @@ if((isset($_SESSION['online']) && $_SESSION['online'] == true))
     }
 
     // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" )
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif" && $imageFileType != "mpeg")
     {
-      $_SESSION['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> Tylko zdjęcia z rozszerzeniem: .jpg, .png, .jpeg, .mpeg, .gif</div>';
+      $_SESSION['error'] = '<div class="alert alert-danger"><strong>Danger!</strong> Tylko zdjęcia z rozszerzeniem: .jpg, .png, .jpeg, .gif</div>';
       header('Location: gallery.php');
       exit();
     }
 
       //dodanie do bazy pictures nazwy zdjecia i kategorii
       require_once ("connect.php");
-
-      //$connect = @new mysqli($host,$db_user,$db_password,$db_name);
-      //mysqli_query($connect, "SET CHARSET utf8");
-      //mysqli_query($connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
 
       if ($connect->connect_error)
       {

@@ -6,13 +6,11 @@
 
   if(empty($_POST['login']) || empty($_POST['password']))
   {
-    header("Location: admin.php?id=<?php echo $id ?>");
+    header("Location: admin.php?id=$id");
     exit();
   }
 
   require_once ("connect.php");
-
-  $connect = @new mysqli($host, $db_user, $db_password, $db_name);
 
   	if ($connect->connect_error)
   	{
@@ -45,7 +43,7 @@
               //include('game.php');
               if($id == 0)
               {
-                header("Location: panel.php?id=$id ");
+                header("Location: panel.php?id=$id");
               }
               if($id == 1)
               {
@@ -55,18 +53,30 @@
               {
                 header("Location: gallery.php?id=$id");
               }
+              if($id == 3)
+              {
+                header("Location: contact.php?id=$id");
+              }
+              if($id == 4)
+              {
+                header("Location: about.php?id=$id");
+              }
+              if($id == 5)
+              {
+                header("Location: index.php?id=$id");
+              }
             } else
               {
                 $_SESSION['error'] = '<div class="alert alert-danger">
                   <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></strong> Incorrect password!!!</div>';
-            header("Location: admin.php?id=<?php echo $id ?>");
+                  header("Location: admin.php?id=$id");
               }
           } else
             {
               //echo "Błąd logowania na strone!!!";
               $_SESSION['error'] = '<div class="alert alert-danger">
                 <strong><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span></strong> Incorrect login!!!</div>';
-            header("Location: admin.php?id=<?php echo $id ?>");
+                header("Location: admin.php?id=$id");
             }
       }
 

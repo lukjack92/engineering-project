@@ -10,11 +10,6 @@ echo $desc = $_POST['description'];
 
 require_once("connect.php");
 
-$connect =@new mysqli($host,$db_user,$db_password,$db_name);
-
-mysqli_query($connect, "SET CHARSET utf8");
-mysqli_query($connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
-
 if($connect->connect_errno)
 {
   echo "Connect Error: ".$connect->connect_errno;
@@ -55,7 +50,7 @@ if($connect->connect_errno)
   {
     $desc = htmlentities($desc,ENT_QUOTES,"UTF-8");
     @$connect->query("INSERT INTO $db_cat (category,description) VALUES ('$kat','$desc')");
-    $_SESSION['error'] = '<div class="alert alert-success"><strong>Sukces! </strong>Dodano pomyślnie!!!</div>';
+    $_SESSION['error'] = '<div class="alert alert-success"><strong>Sukces! </strong>Dodano pomyślnie kategorię: '.$kat.'!!!</div>';
     header("Location: gallery.php");
     $connect->close();
   }

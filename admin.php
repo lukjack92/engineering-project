@@ -46,7 +46,7 @@
         <li><a href="quiz.php"><span class="glyphicon glyphicon-education"></span> Quiz</a></li>
         <li><a href="video.php"><span class="glyphicon glyphicon-facetime-video"></span> Video</a></li>
         <li><a href="gallery.php"><span class="glyphicon glyphicon-picture"></span> Galeria</a></li>
-        <li><a href="about.html"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
+        <li><a href="about.php"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
         <li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span> Kontakt</a></li>
       </ul>
     <div>

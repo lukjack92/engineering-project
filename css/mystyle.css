@@ -132,8 +132,8 @@ tr.color {
 
 .imag
 {
-  width: 198px;
-  height: 198px;
+  width: 223px;
+  height: 223px;
   margin-top: 10px;
   margin-left: 20px;
   margin-bottom: 20px;
@@ -202,6 +202,11 @@ li > a:hover {
 .img {
 color: red;
 border-radius: 8px;
+}
+
+textarea {
+  resize: vertical;
+  overflow: auto;
 }
 
 .color {

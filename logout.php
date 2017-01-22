@@ -19,5 +19,19 @@
   {
     header("Location: gallery.php");
   }
+
+  if($id == 3)
+  {
+    header("Location: contact.php");
+  }
+
+  if($id == 4)
+  {
+    header("Location: about.php");
+  }
+  if($id == 5)
+  {
+    header("Location: index.php");
+  }
   //header("Location: admin.php?id=$id");
 ?>

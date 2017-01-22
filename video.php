@@ -33,7 +33,7 @@
           <li><a href="quiz.php"><span class="glyphicon glyphicon-education"></span> Quiz</a></li>
           <li><a href="video.php"><span class="glyphicon glyphicon-facetime-video"></span> Video</a></li>
           <li><a href="gallery.php"><span class="glyphicon glyphicon-picture"></span> Galeria</a>
-          <li><a href="about.html"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
+          <li><a href="about.php"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
           <li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span> Kontakt</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
@@ -64,11 +64,6 @@
           <?php
 
             require_once("connect.php");
-
-            $connect = @new mysqli("$host",$db_user,$db_password,$db_name);
-
-            mysqli_query($connect, "SET CHARSET utf8");
-            mysqli_query($connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
 
             if($connect->connect_error)
             {
@@ -106,8 +101,9 @@
               <?php
                   }
                 }
+              }else {
+                echo '<div class="alert alert-danger"><center><strong>Brak tabeli video!!!</strong></center></div>';
               }
-
             }
 
             if(isset($_SESSION['online']) && $_SESSION['online'] == true)
@@ -133,7 +129,7 @@
                 }
               echo '</div>';
               echo '<div class="form-group">';
-              echo '<textarea class="form-control" rows="2" name="contents" placeholder="Czytaj więcej..."></textarea>';
+              echo '<textarea class="form-control" rows="3" name="contents" placeholder="Czytaj więcej..." style="resize: vertical"></textarea>';
                 if(isset($_SESSION['error_contents']))
                 {
                   echo $_SESSION['error_contents'];

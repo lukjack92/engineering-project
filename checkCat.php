@@ -8,11 +8,6 @@ if((isset($_SESSION['online']) && $_SESSION['online'] == true))
 
   require_once ("connect.php");
 
-  $connect = @new mysqli($host,$db_user,$db_password,$db_name);
-
-  mysqli_query($connect, "SET CHARSET utf8");
-  mysqli_query($connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
-
   if ($connect->connect_error)
   {
     echo "Connect Error: ".$connect->connect_errno;
@@ -29,7 +24,7 @@ if((isset($_SESSION['online']) && $_SESSION['online'] == true))
 
       if($row['category'] == $cat)
       {
-        $_SESSION['desc'] = '<div><h4>Opis kategori: </h4>'. $row['description'] .'<br/><a class="btn btn-primary" href="delCat.php?del='. $row["category"].'">Usuń</a></div>';
+        $_SESSION['desc'] = '<div><h4>Opis kategori: '.$row["category"].'</h4>'. $row['description'] .'<br/><a class="btn btn-primary" href="delCat.php?del='. $row["category"].'">Usuń kategorię i zdjęcia</a></div>';
         header("Location: gallery.php");
       }
     }

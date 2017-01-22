@@ -1,5 +1,4 @@
 <?php
-
   session_start();
 
   if(empty($_POST['user']) && empty($_POST['password']))
@@ -30,8 +29,6 @@
   //echo $_POST['password'] . "\n";
 
   require_once('connect.php');
-
-  $connect = @new mysqli($host,$db_user,$db_password,$db_name);
 
   if($connect->connect_error)
   {

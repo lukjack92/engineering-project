@@ -38,7 +38,7 @@
           <li><a href="quiz.php"><span class="glyphicon glyphicon-education"></span> Quiz</a></li>
           <li><a href="video.php"><span class="glyphicon glyphicon-facetime-video"></span> Video</a></li>
           <li><a href="gallery.php"><span class="glyphicon glyphicon-picture"></span> Galeria</a></li>
-          <li><a href="about.html"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
+          <li><a href="about.php"><span class="glyphicon glyphicon-sunglasses"></span> O Autorze...</a></li>
           <li><a href="contact.php"><span class="glyphicon glyphicon-envelope"></span> Kontakt</a></li>
         </ul>
         <ul class="nav navbar-nav pull-right">
@@ -65,11 +65,6 @@
         <?php
           require_once ("connect.php");
 
-          $connect = @new mysqli($host,$db_user,$db_password,$db_name);
-
-          mysqli_query($connect, "SET CHARSET utf8");
-          mysqli_query($connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
-
           if ($connect->connect_error)
           {
             ?> <div class="alert alert-danger" role="alert"><?php echo "Brak bazy danych. Błąd: ".$connect->connect_errno;?></div> <?php
@@ -79,25 +74,28 @@
               if($result = @$connect->query("SELECT distinct kategoria FROM $db_quest ORDER BY `kategoria`"))
               {
                 $how = $result->num_rows;
+
+                ?>
+                <div class="form-group" id="select">
+                  <center>Wybierz kategorie pytań:</center>
+                    <select class="form-control" id="selVal">
+                      <?php
+                        for ($i = 1; $i <= $how; $i++)
+                        {
+                          $row = $result->fetch_assoc();
+                          $kat = $row['kategoria'];
+                          echo "<option>$kat</option>";
+                        }
+                      ?>
+                    </select>
+                  </div>
+              <?php
               }else
               {
-                echo '<div class="alert alert-danger"><center><strong>Brak tabeli questions</strong></center></div>';
+                echo '<div class="alert alert-danger"><center><strong>Brak tabeli questions!!!</strong></center></div>';
               }
           }
         ?>
-          <div class="form-group" id="select">
-            <center>Wybierz kategorie pytań:</center>
-              <select class="form-control" id="selVal">
-                <?php
-                    for ($i = 1; $i <= $how; $i++)
-                    {
-                      $row = $result->fetch_assoc();
-                      $kat = $row['kategoria'];
-                      echo "<option>$kat</option>";
-                    }
-                 ?>
-              </select>
-            </div>
           <div class='btn btn-default pull-right' id='next'><span class="glyphicon glyphicon-arrow-right"></span></div>
           <div class='btn btn-default pull-right' id='prev'><span class="glyphicon glyphicon-arrow-left"></span></div>
           <div class='btn btn-lg btn-primary btn-block' id='start'><span class="glyphicon glyphicon-play-circle"></span>Start Quiz</div>

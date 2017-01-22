@@ -13,11 +13,6 @@
 
   require_once ("connect.php");
 
-  $connect = @new mysqli($host,$db_user,$db_password,$db_name);
-
-  mysqli_query($connect, "SET CHARSET utf8");
-  mysqli_query($connect, "SET NAMES 'utf8' COLLATE 'utf8_polish_ci'");
-
   if ($connect->connect_error)
   {
     echo "Connect Error: ".$connect->connect_errno;
@@ -39,13 +34,11 @@
       $_SESSION['all_ok'] = false;
       $_SESSION['error_contents'] = '<div class="alert alert-danger"><strong>Danger! </strong>Nie podałeś "Czytaj wiecej..."</div>';
     }
-
     if($_SESSION['all_ok'])
     {
       @$connect->query("INSERT INTO $db_video (tresc,url,czytaj) VALUES ('$c1','$c2','$c3')");
       header("Location: video.php");
     }
-
     header("Location: video.php");
   }
 ?>
